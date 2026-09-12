@@ -333,3 +333,5 @@ app.listen(PORT, () => {
   console.log(`🚀 GovTech Procurement Pathway App running on http://localhost:${PORT}`);
   console.log(`===========================================================`);
 });
+
+module.exports = app;
