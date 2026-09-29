@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scale-Up Passport Verification Gateway | GovTech</title>
+  <title>Scale-Up Passport & Cross-District Direct Procurement Gateway | GovTech</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -20,19 +20,19 @@
         <i data-lucide="shield-check" class="w-10 h-10"></i>
       </div>
       <div class="inline-block px-3 py-1 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-bold text-xs rounded-full">
-        OFFICIAL VERIFICATION GATEWAY
+        STATE SCALE-UP PASSPORT GATEWAY
       </div>
-      <h1 class="text-xl font-extrabold text-white tracking-tight">Scale-Up Procurement Passport</h1>
-      <p class="text-xs text-slate-400">Government Innovation Procurement & Sandbox Network</p>
+      <h1 class="text-xl font-extrabold text-white tracking-tight">Cross-District Procurement Verification</h1>
+      <p class="text-xs text-slate-400">Validated Innovation Pilot Network (GFR 2017 Rule 161)</p>
     </div>
 
     <!-- Verification Badge Card -->
     <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-5 space-y-4 relative z-10 text-xs">
       
       <div class="flex justify-between items-center border-b border-slate-700 pb-3">
-        <span class="text-slate-400 font-semibold">AUTHENTICATION STATUS</span>
+        <span class="text-slate-400 font-semibold">VALIDATION STATUS</span>
         <span class="bg-emerald-500/20 text-emerald-300 font-bold px-3 py-1 rounded-full border border-emerald-500/40 flex items-center gap-1.5 text-xs">
-          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span> VERIFIED VALID
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span> PRE-VALIDATED SOLUTION
         </span>
       </div>
 
@@ -42,7 +42,7 @@
           <span id="passport-id" class="text-white font-bold text-sm">SCALEUP-PASS-APP-9012</span>
         </div>
         <div>
-          <span class="text-indigo-400 text-[11px] block">QUALIFIED STARTUP</span>
+          <span class="text-indigo-400 text-[11px] block">VALIDATED STARTUP</span>
           <span id="startup-name" class="text-white font-bold text-sm">AeroMed Robotics Pvt Ltd</span>
         </div>
         <div class="grid grid-cols-2 gap-2 pt-1">
@@ -51,40 +51,97 @@
             <span id="dpiit-num" class="text-emerald-400 font-bold">DPIIT89421</span>
           </div>
           <div>
-            <span class="text-indigo-400 text-[11px] block">PILOT SCORE</span>
+            <span class="text-indigo-400 text-[11px] block">TESTED PILOT SCORE</span>
             <span id="pilot-score" class="text-emerald-400 font-bold">8.7 / 10 (PASSED)</span>
           </div>
         </div>
         <div>
-          <span class="text-indigo-400 text-[11px] block">HOST DEPARTMENT</span>
+          <span class="text-indigo-400 text-[11px] block">ORIGINAL HOST DEPT</span>
           <span id="host-dept" class="text-slate-200">Pune Municipal Corporation & Health Dept</span>
         </div>
         <div>
-          <span class="text-indigo-400 text-[11px] block">VALIDATED SOLUTION</span>
+          <span class="text-indigo-400 text-[11px] block">PROVEN SOLUTION</span>
           <span id="solution-title" class="text-slate-200">Autonomous Medical Vaccine Logistics Drones</span>
         </div>
       </div>
 
-      <div class="bg-indigo-950/60 border border-indigo-500/30 p-3 rounded-xl space-y-1">
-        <span class="text-indigo-300 font-bold block text-[11px]">LEGAL DIRECT PROCURE REQUIREMENT:</span>
+      <div class="bg-emerald-950/50 border border-emerald-500/30 p-3 rounded-xl space-y-1">
+        <span class="text-emerald-400 font-bold block text-[11px]">⚡ WHY THIS IS PASSPORT VALIDATED:</span>
         <p class="text-slate-300 text-[11px] leading-relaxed">
-          Approved for Direct Multi-District & Cross-Department Adoption without fresh tendering under <strong>GFR 2017 Rule 161</strong> and <strong>Maharashtra State Startup Policy Sec 4.2</strong>.
+          Because Pune District has already completed & certified this 60-day pilot, <strong>ANY OTHER DISTRICT</strong> can directly adopt and procure this solution under GFR 2017 Rule 161 without repeating a fresh 18-month tender process!
         </p>
       </div>
 
+      <!-- DIRECT CROSS-DISTRICT ADOPTION ACTION FORM -->
+      <div class="bg-indigo-950/70 border border-indigo-500/40 p-4 rounded-xl space-y-3 pt-3">
+        <h4 class="text-white font-bold text-xs flex items-center gap-1.5">
+          <i data-lucide="building" class="w-4 h-4 text-indigo-400"></i> Are you an official from another district?
+        </h4>
+        
+        <div class="space-y-2 text-left">
+          <label class="text-[11px] text-indigo-200 block font-semibold">Select Your Adopting District / City:</label>
+          <select id="select-district" class="w-full bg-slate-900 border border-indigo-400/40 text-white rounded-lg p-2 text-xs focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+            <option value="Nagpur Municipal Corporation (Public Health)">Nagpur Municipal Corporation (Public Health)</option>
+            <option value="Thane District Collectorate (Rural Health)">Thane District Collectorate (Rural Health)</option>
+            <option value="Nashik Municipal Corporation">Nashik Municipal Corporation</option>
+            <option value="Greater Chennai Corporation">Greater Chennai Corporation</option>
+            <option value="Bengaluru Metropolitan Transport Corp">Bengaluru Metropolitan Transport Corp</option>
+          </select>
+        </div>
+
+        <button onclick="issueDirectProcurement()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 shadow-lg transition-all">
+          <i data-lucide="zap" class="w-4 h-4"></i> Issue Direct Work Order (Zero Tendering)
+        </button>
+      </div>
+
       <div class="bg-slate-900 p-2.5 rounded-xl text-[10px] font-mono text-slate-400 border border-slate-800 break-all">
-        SHA-256 HASH: <span id="hash-code" class="text-slate-300">SHA256-MH-GOV-2026-EXP884920418-VERIFIED</span>
+        SHA-256 VERIFIED HASH: <span id="hash-code" class="text-slate-300">SHA256-MH-GOV-2026-EXP884920418</span>
       </div>
     </div>
 
-    <!-- Actions -->
+    <!-- Return link -->
     <div class="space-y-2 relative z-10 text-center">
-      <a href="index.html" class="inline-flex items-center justify-center gap-2 w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl text-xs shadow-lg transition-all">
-        <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to GovTech Portal
+      <a href="index.html" class="inline-flex items-center justify-center gap-2 w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold py-2.5 rounded-xl text-xs transition-all border border-slate-700">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Main Prototype Command Center
       </a>
-      <p class="text-[10px] text-slate-500 font-semibold">Digitally Signed & Certified by State Innovation Procurement Authority 2026</p>
+      <p class="text-[10px] text-slate-500 font-semibold">State Innovation Procurement Portal • GFR 2017 Compliant</p>
     </div>
 
+  </div>
+
+  <!-- MODAL: GENERATED DIRECT PURCHASE ORDER -->
+  <div id="modal-po" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-emerald-500/40 max-w-md w-full rounded-3xl p-6 shadow-2xl space-y-4 text-xs font-mono relative">
+      <div class="flex justify-between items-start border-b border-slate-800 pb-3">
+        <div>
+          <span class="text-emerald-400 font-bold text-[11px] block">DIRECT PROCUREMENT PURCHASE ORDER</span>
+          <h3 id="po-number" class="text-white font-bold text-base">PO-SCALEUP-2026-NAGPUR-884</h3>
+        </div>
+        <button onclick="document.getElementById('modal-po').classList.add('hidden')" class="text-slate-400 hover:text-white">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="bg-emerald-950/40 border border-emerald-500/30 p-3 rounded-xl text-emerald-300 text-[11px]">
+        ✅ <strong>ZERO TENDERING ADOPTION GRANTED</strong><br>
+        Issued under GFR 2017 Rule 161 & Maharashtra Startup Policy Sec 4.2 Scale-Up Provision.
+      </div>
+
+      <div class="space-y-1.5 text-slate-300">
+        <div><span class="text-slate-500">ISSUING AUTHORITY:</span> <strong id="po-dept" class="text-white">Nagpur Municipal Corporation</strong></div>
+        <div><span class="text-slate-500">QUALIFIED VENDOR:</span> <strong class="text-white">AeroMed Robotics Pvt Ltd (DPIIT89421)</strong></div>
+        <div><span class="text-slate-500">SOLUTION:</span> <strong class="text-white">Autonomous Medical Vaccine Logistics Drones</strong></div>
+        <div><span class="text-slate-500">PREVIOUS PILOT SCORE:</span> <strong class="text-emerald-400">8.7 / 10 (Pune District Certified)</strong></div>
+        <div><span class="text-slate-500">APPROVED SCALE BUDGET:</span> <strong class="text-emerald-400">₹15,00,000</strong></div>
+        <div><span class="text-slate-500">PROCUREMENT CYCLE SAVED:</span> <strong class="text-indigo-400">18 Months Saved ➔ Immediate Deployment</strong></div>
+      </div>
+
+      <div class="pt-2 border-t border-slate-800 flex justify-end gap-2">
+        <button onclick="window.print()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow">
+          <i data-lucide="printer" class="w-4 h-4"></i> Print Direct Work Order Certificate
+        </button>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -96,6 +153,15 @@
 
     if (id) {
       document.getElementById('passport-id').innerText = `SCALEUP-PASS-${id.toUpperCase()}`;
+    }
+
+    function issueDirectProcurement() {
+      const selectedDept = document.getElementById('select-district').value;
+      document.getElementById('po-dept').innerText = selectedDept;
+      const deptShort = selectedDept.split(' ')[0].toUpperCase();
+      document.getElementById('po-number').innerText = `PO-SCALEUP-2026-${deptShort}-${Math.floor(100 + Math.random() * 900)}`;
+      document.getElementById('modal-po').classList.remove('hidden');
+      if (window.lucide) lucide.createIcons();
     }
   </script>
 </body>
