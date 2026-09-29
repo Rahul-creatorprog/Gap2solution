@@ -4,201 +4,280 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GovTech Innovation Procurement & Sandbox Pathway</title>
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="min-h-screen flex flex-col">
 
-  <!-- TOP NAVIGATION & DEMO ROLE SWITCHER -->
-  <header class="gradient-header text-white shadow-lg sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center gap-4">
+  <!-- ===== TOP NAVIGATION ===== -->
+  <header class="gradient-header text-white sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center gap-3">
+      <!-- BRAND -->
       <div class="flex items-center gap-3">
-        <div class="bg-blue-600 p-2 rounded-lg text-white font-bold">
-          <i data-lucide="shield-check" class="w-6 h-6"></i>
+        <div class="bg-indigo-600 p-2 rounded-xl shadow-lg shadow-indigo-500/30">
+          <i data-lucide="shield-check" class="w-5 h-5 text-white"></i>
         </div>
         <div>
-          <h1 class="text-xl font-bold tracking-tight">GovTech Pathway</h1>
-          <p class="text-xs text-slate-300">Government-Startup Innovation Procurement Engine</p>
+          <h1 class="text-lg font-extrabold tracking-tight leading-tight">GovTech Pathway</h1>
+          <p class="text-[10px] text-slate-400 font-medium">Government–Startup Innovation Procurement Engine</p>
         </div>
       </div>
 
-      <!-- DEMO ROLE SWITCHER BANNER -->
-      <div class="bg-slate-800/80 p-1.5 rounded-xl border border-slate-700 flex flex-wrap items-center gap-1 shadow-inner">
-        <span class="text-xs text-slate-400 font-semibold px-2">DEMO ROLE:</span>
-        <button id="btn-role-dept" onclick="switchRole('DEPARTMENT')" class="px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all bg-blue-600 text-white shadow">
-          <i data-lucide="building-2" class="w-3.5 h-3.5"></i> Department Official
-        </button>
-        <button id="btn-role-startup" onclick="switchRole('STARTUP')" class="px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all text-slate-300 hover:text-white hover:bg-slate-700">
-          <i data-lucide="rocket" class="w-3.5 h-3.5"></i> Startup Founder
-        </button>
-        <button id="btn-role-expert" onclick="switchRole('EXPERT')" class="px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all text-slate-300 hover:text-white hover:bg-slate-700">
-          <i data-lucide="user-check" class="w-3.5 h-3.5"></i> Expert Evaluator
-        </button>
-        <button onclick="resetPrototypeData()" class="px-2.5 py-1.5 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-xs font-semibold flex items-center gap-1 transition-all ml-1 shadow" title="Reset all data to empty state for fresh demo">
+      <!-- ROLE SWITCHER + RESET -->
+      <div class="flex items-center gap-2 flex-wrap">
+        <div class="bg-slate-900/80 p-1 rounded-xl border border-slate-700 flex items-center gap-1 shadow-inner">
+          <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider px-1.5">Role:</span>
+          <button id="btn-role-dept" onclick="switchRole('DEPARTMENT')" class="px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all bg-blue-600 text-white shadow">
+            <i data-lucide="building-2" class="w-3.5 h-3.5"></i> Dept. Official
+          </button>
+          <button id="btn-role-startup" onclick="switchRole('STARTUP')" class="px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all text-slate-400 hover:text-white hover:bg-slate-700">
+            <i data-lucide="rocket" class="w-3.5 h-3.5"></i> Startup Founder
+          </button>
+          <button id="btn-role-expert" onclick="switchRole('EXPERT')" class="px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all text-slate-400 hover:text-white hover:bg-slate-700">
+            <i data-lucide="user-check" class="w-3.5 h-3.5"></i> Expert Evaluator
+          </button>
+        </div>
+        <button onclick="resetPrototypeData()" class="px-3 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow" title="Clear all data for fresh demo">
           <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Reset Demo
         </button>
       </div>
     </div>
   </header>
 
-  <!-- IMPACT BANNER STATS -->
-  <section class="bg-blue-900 text-blue-100 border-b border-blue-800 py-2.5 text-xs font-medium">
+  <!-- ===== IMPACT TICKER BANNER ===== -->
+  <section class="bg-gradient-to-r from-blue-950 via-blue-900 to-indigo-950 text-blue-100 border-b border-blue-800/50 py-2 text-xs font-semibold">
     <div class="max-w-7xl mx-auto px-4 flex flex-wrap justify-between items-center gap-2">
       <div class="flex items-center gap-2">
-        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span>Procurement Cycle: <strong>18 Months ➔ 60 Days</strong></span>
+        <span class="live-dot"></span>
+        <span>Procurement Cycle: <strong class="text-emerald-300">18 Months → 60 Days</strong></span>
       </div>
-      <div class="flex items-center gap-4">
-        <span>📜 GFR 2017 Rule 161 Active</span>
-        <span>🛡️ Safe-to-Fail Sandbox Framework</span>
-        <span>💳 Milestone Escrow Release</span>
+      <div class="flex items-center gap-5">
+        <span class="flex items-center gap-1.5"><i data-lucide="scroll" class="w-3 h-3 text-blue-300"></i> GFR 2017 Rule 161 Active</span>
+        <span class="flex items-center gap-1.5"><i data-lucide="shield" class="w-3 h-3 text-emerald-300"></i> Safe-to-Fail Sandbox</span>
+        <span class="flex items-center gap-1.5"><i data-lucide="lock" class="w-3 h-3 text-amber-300"></i> Milestone Escrow Release</span>
       </div>
     </div>
   </section>
 
-  <!-- MAIN DYNAMIC CONTENT CONTAINER -->
-  <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-6">
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-8 space-y-6">
 
-    <!-- ROLE 1: DEPARTMENT OFFICIAL VIEW -->
-    <div id="view-department" class="space-y-6">
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-        <div>
-          <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
-            <i data-lucide="building-2" class="text-blue-600"></i> Department Command Center
-          </h2>
-          <p class="text-sm text-slate-500">Post outcome-based challenges, monitor pilot sandboxes & export audit trails.</p>
+    <!-- ============================== -->
+    <!-- ROLE 1: DEPARTMENT OFFICIAL    -->
+    <!-- ============================== -->
+    <div id="view-department" class="space-y-6 anim-in">
+
+      <!-- Page Header -->
+      <div class="command-header">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div class="flex items-start gap-3">
+            <div class="bg-blue-600/20 text-blue-400 p-2.5 rounded-xl border border-blue-500/20">
+              <i data-lucide="building-2" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h2 class="text-xl font-extrabold text-white">Department Command Center</h2>
+              <p class="text-sm text-slate-400 mt-0.5">Post outcome-based challenges · Monitor sandbox pilots · Export CAG audit trails</p>
+            </div>
+          </div>
+          <button onclick="openModal('modal-create-challenge')" class="bg-blue-500 hover:bg-blue-400 text-white font-bold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2 shadow-lg shadow-blue-500/25 transition-all whitespace-nowrap">
+            <i data-lucide="plus-circle" class="w-4 h-4"></i> Post New Challenge
+          </button>
         </div>
-        <button onclick="openModal('modal-create-challenge')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2.5 rounded-xl text-sm flex items-center gap-2 shadow-md transition-all">
-          <i data-lucide="plus-circle" class="w-4 h-4"></i> Post New Challenge
-        </button>
+
+        <!-- Quick Stats Row -->
+        <div class="grid grid-cols-3 gap-3 mt-5">
+          <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
+            <div class="text-2xl font-extrabold text-white" id="stat-challenges">0</div>
+            <div class="text-[10px] text-slate-400 font-semibold mt-0.5 uppercase tracking-wider">Active Challenges</div>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
+            <div class="text-2xl font-extrabold text-amber-400" id="stat-applications">0</div>
+            <div class="text-[10px] text-slate-400 font-semibold mt-0.5 uppercase tracking-wider">Applications Pending</div>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
+            <div class="text-2xl font-extrabold text-emerald-400">60</div>
+            <div class="text-[10px] text-slate-400 font-semibold mt-0.5 uppercase tracking-wider">Day Max Cycle</div>
+          </div>
+        </div>
       </div>
 
-      <!-- ACTIVE CHALLENGES TABLE & AUDIT CARDS -->
+      <!-- Main Grid: Challenges + Right Panel -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Left: Posted Challenges -->
         <div class="lg:col-span-2 space-y-4">
-          <h3 class="text-lg font-bold text-slate-800 flex items-center justify-between">
-            <span>Posted Operational Challenges</span>
-            <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full font-normal">Active Pipeline</span>
-          </h3>
+          <div class="section-header">
+            <div class="section-header-accent bg-blue-500"></div>
+            <h3 class="text-base font-bold text-slate-800">Posted Operational Challenges</h3>
+            <span class="ml-auto text-[11px] bg-blue-50 text-blue-700 border border-blue-200 px-2.5 py-0.5 rounded-full font-bold">Active Pipeline</span>
+          </div>
           <div id="dept-challenges-list" class="space-y-4">
-            <!-- Dynamic Cards Loaded via app.js -->
+            <!-- Dynamic via app.js -->
           </div>
         </div>
 
-        <!-- RIGHT PANEL: AUDIT & SCALE-UP COMPLIANCE QUICK ACTIONS -->
+        <!-- Right: CAG Audit + Scale-Up -->
         <div class="space-y-4">
+          <!-- CAG Audit Card -->
           <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-            <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
-              <i data-lucide="shield-alert" class="text-emerald-600"></i> CAG Audit & Compliance
-            </h3>
+            <div class="section-header">
+              <div class="section-header-accent bg-emerald-500"></div>
+              <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                <i data-lucide="shield-alert" class="text-emerald-600 w-4 h-4"></i> CAG Audit & Compliance
+              </h3>
+            </div>
             <p class="text-xs text-slate-600 leading-relaxed">
-              Export 1-click audit documentation verifying GFR 2017 Rule 161 innovator exemptions and expert scoring logs for audit safety.
+              Export 1-click audit documentation verifying <strong>GFR 2017 Rule 161</strong> innovator exemptions and expert scoring logs for CAG audit safety.
             </p>
-            <button onclick="triggerAuditReport('APP-9012')" class="w-full bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-800 font-semibold px-4 py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 transition-all">
-              <i data-lucide="file-text" class="w-4 h-4 text-emerald-600"></i> 📄 Export CAG Audit Trail PDF
+            <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-3 space-y-1 text-xs">
+              <div class="flex items-center gap-1.5 text-emerald-700 font-bold"><i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Zero audit liability risk</div>
+              <div class="flex items-center gap-1.5 text-emerald-700 font-bold"><i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Pre-approved sandbox waiver</div>
+              <div class="flex items-center gap-1.5 text-emerald-700 font-bold"><i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Expert scoring log attached</div>
+            </div>
+            <button onclick="triggerAuditReport('APP-9012')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 transition-all shadow">
+              <i data-lucide="file-text" class="w-4 h-4"></i> Export CAG Audit Trail
             </button>
           </div>
 
-          <div class="bg-gradient-to-br from-indigo-900 to-slate-900 text-white p-5 rounded-2xl shadow-sm space-y-3">
-            <h3 class="font-bold text-sm flex items-center gap-2">
-              <i data-lucide="qr-code" class="text-indigo-400"></i> Scale-Up Passport Verification
-            </h3>
-            <p class="text-xs text-indigo-200">
-              Validated pilots receive a QR Passport enabling direct procurement adoption across other districts without re-piloting.
+          <!-- Scale-Up Passport Card -->
+          <div class="bg-gradient-to-br from-indigo-950 via-slate-900 to-indigo-950 text-white p-5 rounded-2xl border border-indigo-500/20 shadow-lg space-y-3">
+            <div class="flex items-center gap-2 pb-2 border-b border-indigo-500/20">
+              <div class="bg-indigo-500/20 text-indigo-400 p-1.5 rounded-lg">
+                <i data-lucide="qr-code" class="w-4 h-4"></i>
+              </div>
+              <h3 class="font-bold text-sm">Scale-Up Passport</h3>
+            </div>
+            <p class="text-xs text-indigo-200 leading-relaxed">
+              Validated pilots receive a <strong class="text-white">QR Passport</strong> enabling direct procurement adoption across other districts — no re-piloting required.
             </p>
-            <button onclick="triggerScaleUpPassport('APP-9012')" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-4 py-2 rounded-xl text-xs flex items-center justify-center gap-2 transition-all">
-              <i data-lucide="award" class="w-4 h-4"></i> View Validated Passport
+            <div class="bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-2.5 text-[11px] font-mono text-indigo-300 text-center">
+              Cross-District Direct Work Order Engine
+            </div>
+            <button onclick="triggerScaleUpPassport('APP-9012')" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-4 py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 transition-all shadow">
+              <i data-lucide="award" class="w-4 h-4"></i> View Scale-Up Passport
             </button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ROLE 2: STARTUP FOUNDER VIEW -->
-    <div id="view-startup" class="space-y-6 hidden">
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-        <div>
-          <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
-            <i data-lucide="rocket" class="text-indigo-600"></i> Startup Founder Innovation Portal
-          </h2>
-          <p class="text-sm text-slate-500">Discover government demand, claim DPIIT turnover waivers & track milestone payments.</p>
-        </div>
-        <div class="flex items-center gap-2 bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1.5 rounded-xl text-xs font-semibold">
-          <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600"></i> DPIIT Exemption Active
+    <!-- ============================== -->
+    <!-- ROLE 2: STARTUP FOUNDER        -->
+    <!-- ============================== -->
+    <div id="view-startup" class="space-y-6 hidden anim-in">
+
+      <!-- Page Header -->
+      <div class="role-header startup">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+          <div class="flex items-start gap-3">
+            <div class="bg-indigo-100 text-indigo-600 p-2.5 rounded-xl">
+              <i data-lucide="rocket" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h2 class="text-xl font-extrabold text-slate-900">Startup Founder Portal</h2>
+              <p class="text-sm text-slate-500 mt-0.5">Discover government demand · Claim DPIIT waivers · Track milestone escrow payments</p>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="audit-pill"><i data-lucide="shield-check" class="w-3 h-3"></i> DPIIT Exemption Active</span>
+            <span class="audit-pill" style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe;"><i data-lucide="file-check" class="w-3 h-3"></i> GFR 2017 Rule 161</span>
+          </div>
         </div>
       </div>
 
-      <!-- ESCROW & MILESTONE FINANCIAL TRACKER (DYNAMICALLY LOADED VIA APP.JS) -->
+      <!-- Escrow Tracker (Dynamic) -->
       <div id="escrow-tracker-container"></div>
 
-      <!-- OPEN CHALLENGES LIST FOR STARTUPS -->
+      <!-- Available Challenges -->
       <div class="space-y-4">
-        <h3 class="text-lg font-bold text-slate-800">Available Government Challenges (Apply with DPIIT Waiver)</h3>
+        <div class="section-header">
+          <div class="section-header-accent bg-indigo-500"></div>
+          <h3 class="text-base font-bold text-slate-800">Available Government Challenges</h3>
+          <span class="ml-auto text-[11px] bg-indigo-50 text-indigo-700 border border-indigo-200 px-2.5 py-0.5 rounded-full font-bold">Apply with DPIIT Waiver</span>
+        </div>
         <div id="startup-challenges-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <!-- Loaded via app.js -->
+          <!-- Dynamic via app.js -->
         </div>
       </div>
     </div>
 
-    <!-- ROLE 3: EXPERT EVALUATOR VIEW -->
-    <div id="view-expert" class="space-y-6 hidden">
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-        <div>
-          <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
-            <i data-lucide="user-check" class="text-amber-600"></i> Independent Expert Evaluation Panel
-          </h2>
-          <p class="text-sm text-slate-500">Split-screen objective technical scoring and safe sandbox approvals.</p>
-        </div>
-        <div class="text-xs bg-amber-50 text-amber-800 border border-amber-200 px-3 py-1.5 rounded-xl font-semibold">
-          Unbiased Scoring Active
+    <!-- ============================== -->
+    <!-- ROLE 3: EXPERT EVALUATOR       -->
+    <!-- ============================== -->
+    <div id="view-expert" class="space-y-6 hidden anim-in">
+
+      <!-- Page Header -->
+      <div class="role-header expert">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+          <div class="flex items-start gap-3">
+            <div class="bg-amber-100 text-amber-600 p-2.5 rounded-xl">
+              <i data-lucide="user-check" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h2 class="text-xl font-extrabold text-slate-900">Independent Expert Evaluation Panel</h2>
+              <p class="text-sm text-slate-500 mt-0.5">Split-screen objective technical scoring · Safe-to-Fail Sandbox license approvals</p>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="bg-amber-50 text-amber-800 border border-amber-200 text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5">
+              <i data-lucide="eye" class="w-3.5 h-3.5"></i> Unbiased Scoring Active
+            </span>
+          </div>
         </div>
       </div>
 
-      <!-- SPLIT-SCREEN SCORING GRID (DYNAMICALLY LOADED VIA APP.JS) -->
+      <!-- Expert Panel Grid (Dynamic) -->
       <div id="expert-panel-container"></div>
-    </div>
     </div>
 
   </main>
 
-  <!-- FOOTER -->
-  <footer class="bg-slate-900 text-slate-400 text-xs border-t border-slate-800 py-4 mt-auto">
-    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
-      <div>GovTech Innovation Procurement & Sandbox Pathway Prototype</div>
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-slate-900 text-slate-500 text-xs border-t border-slate-800 py-5 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+      <div class="flex items-center gap-2 font-semibold text-slate-400">
+        <i data-lucide="shield-check" class="w-3.5 h-3.5 text-indigo-400"></i>
+        GovTech Innovation Procurement & Sandbox Pathway — Prototype
+      </div>
       <div class="flex gap-4">
-        <span>DPIIT API Integrated</span>
-        <span>GFR 2017 Compliant</span>
-        <span>Safe-to-Fail Sandbox Architecture</span>
+        <span class="flex items-center gap-1"><i data-lucide="check-circle" class="w-3 h-3 text-emerald-400"></i> DPIIT API</span>
+        <span class="flex items-center gap-1"><i data-lucide="check-circle" class="w-3 h-3 text-emerald-400"></i> GFR 2017 Compliant</span>
+        <span class="flex items-center gap-1"><i data-lucide="check-circle" class="w-3 h-3 text-emerald-400"></i> Safe-to-Fail Sandbox</span>
       </div>
     </div>
   </footer>
 
-  <!-- ==================== MODALS ==================== -->
 
-  <!-- MODAL 1: CREATE NEW CHALLENGE (WITH AI OPTIMIZER) -->
+  <!-- ================================================ -->
+  <!--                   MODALS                         -->
+  <!-- ================================================ -->
+
+  <!-- MODAL 1: CREATE NEW CHALLENGE -->
   <div id="modal-create-challenge" class="fixed inset-0 modal-overlay z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white max-w-2xl w-full rounded-2xl shadow-2xl border border-slate-200 overflow-hidden space-y-4 p-6">
-      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
-        <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
-          <i data-lucide="plus-circle" class="text-blue-600"></i> Post Outcome-Based Challenge
-        </h3>
-        <button onclick="closeModal('modal-create-challenge')" class="text-slate-400 hover:text-slate-600">
+    <div class="bg-white max-w-2xl w-full rounded-2xl shadow-2xl border border-slate-200 overflow-hidden modal-card">
+      <!-- Modal Header -->
+      <div class="bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <div class="bg-blue-600 text-white p-1.5 rounded-lg"><i data-lucide="plus-circle" class="w-4 h-4"></i></div>
+          <div>
+            <h3 class="text-base font-extrabold text-slate-900">Post Outcome-Based Challenge</h3>
+            <p class="text-[11px] text-slate-500">GFR 2017 Rule 161 — Innovator Exemption Pre-Attached</p>
+          </div>
+        </div>
+        <button onclick="closeModal('modal-create-challenge')" class="text-slate-400 hover:text-slate-700 hover:bg-slate-100 p-1.5 rounded-lg transition-all">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
-      <form id="form-create-challenge" onsubmit="handleCreateChallenge(event)" class="space-y-4 text-xs">
+      <form id="form-create-challenge" onsubmit="handleCreateChallenge(event)" class="space-y-4 p-6 text-xs">
         <div class="grid grid-cols-2 gap-4">
           <div>
-            <label class="font-bold text-slate-700 block mb-1">Government Department:</label>
-            <input type="text" id="input-dept" required class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="e.g. Greater Chennai Corporation">
+            <label class="font-bold text-slate-700 block mb-1.5">Government Department:</label>
+            <input type="text" id="input-dept" required class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500" placeholder="e.g. Greater Chennai Corporation">
           </div>
           <div>
-            <label class="font-bold text-slate-700 block mb-1">Sector Category:</label>
-            <select id="input-cat" class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            <label class="font-bold text-slate-700 block mb-1.5">Sector Category:</label>
+            <select id="input-cat" class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
               <option>Smart Municipal Infrastructure</option>
               <option>HealthTech & Supply Chain</option>
               <option>Agritech & Water Management</option>
@@ -208,162 +287,185 @@
         </div>
 
         <div>
-          <label class="font-bold text-slate-700 block mb-1">Challenge Title:</label>
-          <input type="text" id="input-title" required class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="e.g. Smart Drain Waterlogging Warning System">
+          <label class="font-bold text-slate-700 block mb-1.5">Challenge Title:</label>
+          <input type="text" id="input-title" required class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500" placeholder="e.g. Smart Drain Waterlogging Warning System">
         </div>
 
         <div>
-          <div class="flex justify-between items-center mb-1">
+          <div class="flex justify-between items-center mb-1.5">
             <label class="font-bold text-slate-700">Raw Operational Problem Description:</label>
-            <button type="button" onclick="triggerAIOptimizer()" class="bg-indigo-50 text-indigo-700 border border-indigo-200 font-bold px-2.5 py-1 rounded-lg text-[11px] flex items-center gap-1 hover:bg-indigo-100 transition-all">
-              <i data-lucide="wand-2" class="w-3.5 h-3.5 text-indigo-600"></i> 🪄 Refine with Gemini AI
+            <button type="button" onclick="triggerAIOptimizer()" class="bg-indigo-600 text-white border border-indigo-500 font-bold px-3 py-1.5 rounded-lg text-[11px] flex items-center gap-1.5 hover:bg-indigo-700 transition-all shadow">
+              <i data-lucide="wand-2" class="w-3.5 h-3.5"></i> Refine with Gemini AI
             </button>
           </div>
-          <textarea id="input-problem" rows="3" required class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Describe the raw problem faced by your department..."></textarea>
+          <textarea id="input-problem" rows="3" required class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500" placeholder="Describe the raw problem faced by your department (e.g. Waterlogging near railway station during monsoons)..."></textarea>
         </div>
 
         <div>
-          <label class="font-bold text-slate-700 block mb-1">Optimized Outcome & KPI Target (Auto-generated / Editable):</label>
-          <textarea id="input-outcome" rows="2" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Outcome statement will be formatted here..."></textarea>
+          <label class="font-bold text-slate-700 block mb-1.5">
+            Optimized Outcome & KPI Target
+            <span class="text-indigo-600 font-normal ml-1">(Auto-generated · Editable)</span>
+          </label>
+          <textarea id="input-outcome" rows="2" class="w-full p-2.5 bg-indigo-50 border border-indigo-200 rounded-xl focus:ring-2 focus:ring-blue-500 text-slate-700" placeholder="Outcome statement will appear here after Gemini AI refines it..."></textarea>
         </div>
 
         <div class="grid grid-cols-2 gap-4">
           <div>
-            <label class="font-bold text-slate-700 block mb-1">Sandbox Pilot Budget:</label>
-            <input type="text" id="input-budget" value="₹15,00,000" class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            <label class="font-bold text-slate-700 block mb-1.5">Sandbox Pilot Budget:</label>
+            <input type="text" id="input-budget" value="₹15,00,000" class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
           </div>
           <div>
-            <label class="font-bold text-slate-700 block mb-1">Innovator Exemption Status:</label>
+            <label class="font-bold text-slate-700 block mb-1.5">Innovator Exemption Status:</label>
             <div class="p-2.5 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-xl font-bold flex items-center gap-1.5">
               <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i> GFR 2017 Waiver Pre-Attached
             </div>
           </div>
         </div>
 
-        <div class="flex justify-end gap-2 pt-2 border-t border-slate-200">
-          <button type="button" onclick="closeModal('modal-create-challenge')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl">Cancel</button>
-          <button type="submit" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow">Publish Challenge</button>
+        <div class="flex justify-end gap-2 pt-2 border-t border-slate-100">
+          <button type="button" onclick="closeModal('modal-create-challenge')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition-all">Cancel</button>
+          <button type="submit" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-extrabold rounded-xl shadow-md transition-all flex items-center gap-1.5">
+            <i data-lucide="send" class="w-4 h-4"></i> Publish Challenge
+          </button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- MODAL 2: STARTUP APPLY (WITH DPIIT VERIFY) -->
+  <!-- MODAL 2: STARTUP APPLY -->
   <div id="modal-apply" class="fixed inset-0 modal-overlay z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white max-w-lg w-full rounded-2xl shadow-2xl border border-slate-200 overflow-hidden space-y-4 p-6">
-      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
-        <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
-          <i data-lucide="rocket" class="text-indigo-600"></i> Submit Pilot Application
-        </h3>
-        <button onclick="closeModal('modal-apply')" class="text-slate-400 hover:text-slate-600">
+    <div class="bg-white max-w-lg w-full rounded-2xl shadow-2xl border border-slate-200 overflow-hidden modal-card">
+      <!-- Modal Header -->
+      <div class="bg-gradient-to-r from-indigo-50 to-purple-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <div class="bg-indigo-600 text-white p-1.5 rounded-lg"><i data-lucide="rocket" class="w-4 h-4"></i></div>
+          <div>
+            <h3 class="text-base font-extrabold text-slate-900">Submit Pilot Application</h3>
+            <p class="text-[11px] text-slate-500">DPIIT GFR 2017 — Turnover & EMD Waiver Flow</p>
+          </div>
+        </div>
+        <button onclick="closeModal('modal-apply')" class="text-slate-400 hover:text-slate-700 hover:bg-slate-100 p-1.5 rounded-lg transition-all">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
-      <form id="form-apply" onsubmit="handleApplySubmit(event)" class="space-y-4 text-xs">
+      <form id="form-apply" onsubmit="handleApplySubmit(event)" class="space-y-4 p-6 text-xs">
         <input type="hidden" id="apply-challenge-id">
 
         <div>
-          <label class="font-bold text-slate-700 block mb-1">Startup Entity Name:</label>
-          <input type="text" id="apply-startup-name" required value="AeroMed Robotics Pvt Ltd" class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none">
+          <label class="font-bold text-slate-700 block mb-1.5">Startup Entity Name:</label>
+          <input type="text" id="apply-startup-name" required value="AeroMed Robotics Pvt Ltd" class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500">
         </div>
 
         <div>
-          <label class="font-bold text-slate-700 block mb-1">DPIIT Registration Number:</label>
+          <label class="font-bold text-slate-700 block mb-1.5">DPIIT Registration Number:</label>
           <div class="flex gap-2">
-            <input type="text" id="apply-dpiit-num" required value="DPIIT89421" class="w-full p-2.5 border border-slate-300 rounded-xl font-mono uppercase focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="e.g. DPIIT123456">
-            <button type="button" onclick="verifyDPIITInline()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-xl flex items-center gap-1 shadow">
+            <input type="text" id="apply-dpiit-num" required value="DPIIT89421" class="w-full p-2.5 border border-slate-300 rounded-xl font-mono uppercase focus:ring-2 focus:ring-indigo-500" placeholder="e.g. DPIIT123456">
+            <button type="button" onclick="verifyDPIITInline()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded-xl flex items-center gap-1 shadow whitespace-nowrap transition-all">
               <i data-lucide="check" class="w-4 h-4"></i> Verify
             </button>
           </div>
-          <div id="dpiit-status-msg" class="mt-1.5 text-[11px] text-emerald-700 font-semibold flex items-center gap-1">
-            <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> DPIIT Verified. GFR 2017 Turnover & Experience Waiver Granted!
+          <div id="dpiit-status-msg" class="mt-2 text-[11px] text-emerald-700 font-bold flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 rounded-lg px-2.5 py-1.5">
+            <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600"></i>
+            DPIIT Verified. GFR 2017 Turnover & Experience Waiver Granted!
           </div>
         </div>
 
         <div>
-          <label class="font-bold text-slate-700 block mb-1">Technical Solution Summary:</label>
-          <textarea id="apply-solution" rows="3" required class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Briefly describe your hardware/software architecture for this pilot..."></textarea>
+          <label class="font-bold text-slate-700 block mb-1.5">Technical Solution Summary:</label>
+          <textarea id="apply-solution" rows="3" required class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500" placeholder="Briefly describe your hardware/software architecture for this pilot..."></textarea>
         </div>
 
         <div>
-          <label class="font-bold text-slate-700 block mb-1">Pitch Deck & Test Log URL:</label>
-          <input type="url" id="apply-pitch" value="https://aeromed.tech/pitch-deck-v2.pdf" class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none">
+          <label class="font-bold text-slate-700 block mb-1.5">Pitch Deck & Test Log URL:</label>
+          <input type="url" id="apply-pitch" value="https://aeromed.tech/pitch-deck-v2.pdf" class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500">
         </div>
 
-        <div class="flex justify-end gap-2 pt-2 border-t border-slate-200">
-          <button type="button" onclick="closeModal('modal-apply')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl">Cancel</button>
-          <button type="submit" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow">Submit Application</button>
+        <div class="flex justify-end gap-2 pt-2 border-t border-slate-100">
+          <button type="button" onclick="closeModal('modal-apply')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition-all">Cancel</button>
+          <button type="submit" class="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold rounded-xl shadow-md transition-all flex items-center gap-1.5">
+            <i data-lucide="send" class="w-4 h-4"></i> Submit Application
+          </button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- MODAL 3: CAG AUDIT TRAIL REPORT PREVIEW -->
+  <!-- MODAL 3: CAG AUDIT TRAIL -->
   <div id="modal-audit" class="fixed inset-0 modal-overlay z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white max-w-3xl w-full rounded-2xl shadow-2xl border border-slate-200 overflow-hidden space-y-4 p-6 max-h-[90vh] overflow-y-auto">
-      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
-        <div>
-          <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
-            <i data-lucide="file-check-2" class="text-emerald-600"></i> CAG Audit Compliance Certificate
-          </h3>
-          <span class="text-xs text-slate-500">Official Government Audit Trail Log</span>
+    <div class="bg-white max-w-3xl w-full rounded-2xl shadow-2xl border border-slate-200 overflow-hidden modal-card max-h-[92vh] flex flex-col">
+      <!-- Header -->
+      <div class="bg-gradient-to-r from-emerald-50 to-teal-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center flex-shrink-0">
+        <div class="flex items-center gap-2">
+          <div class="bg-emerald-600 text-white p-1.5 rounded-lg"><i data-lucide="file-check-2" class="w-4 h-4"></i></div>
+          <div>
+            <h3 class="text-base font-extrabold text-slate-900">CAG Audit Compliance Certificate</h3>
+            <p class="text-[11px] text-slate-500">Official Government Audit Trail Log — Blockchain Timestamped</p>
+          </div>
         </div>
-        <button onclick="closeModal('modal-audit')" class="text-slate-400 hover:text-slate-600">
+        <button onclick="closeModal('modal-audit')" class="text-slate-400 hover:text-slate-700 hover:bg-slate-100 p-1.5 rounded-lg transition-all">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
-      <div id="audit-report-content" class="space-y-4 text-xs font-mono bg-slate-50 p-4 rounded-xl border border-slate-200 text-slate-800">
-        <!-- Loaded via app.js -->
+      <div class="overflow-y-auto flex-1 p-6">
+        <div id="audit-report-content" class="space-y-4 text-xs font-mono bg-slate-950 text-slate-300 p-5 rounded-xl border border-slate-800">
+          <!-- Dynamic via app.js -->
+        </div>
       </div>
 
-      <div class="flex justify-end gap-2 pt-2 border-t border-slate-200">
-        <button onclick="window.print()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center gap-1.5 shadow">
-          <i data-lucide="printer" class="w-4 h-4"></i> Print Official Audit Certificate
+      <div class="flex justify-end gap-2 p-4 border-t border-slate-200 flex-shrink-0 bg-slate-50">
+        <button onclick="window.print()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center gap-1.5 shadow transition-all">
+          <i data-lucide="printer" class="w-4 h-4"></i> Print Audit Certificate
         </button>
-        <button onclick="closeModal('modal-audit')" class="px-4 py-2 bg-slate-200 text-slate-700 font-semibold rounded-xl text-xs">Close</button>
+        <button onclick="closeModal('modal-audit')" class="px-4 py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-xl text-xs transition-all">Close</button>
       </div>
     </div>
   </div>
 
-  <!-- MODAL 4: SCALE-UP PASSPORT PREVIEW -->
+  <!-- MODAL 4: SCALE-UP PASSPORT -->
   <div id="modal-scaleup" class="fixed inset-0 modal-overlay z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-gradient-to-br from-indigo-950 to-slate-900 text-white max-w-md w-full rounded-3xl shadow-2xl border border-indigo-500/30 overflow-hidden p-6 space-y-4 text-center">
+    <div class="bg-gradient-to-br from-indigo-950 via-slate-900 to-indigo-950 text-white max-w-md w-full rounded-3xl shadow-2xl border border-indigo-500/25 overflow-hidden p-6 space-y-5 text-center">
       <div class="flex justify-end">
-        <button onclick="closeModal('modal-scaleup')" class="text-slate-400 hover:text-white">
+        <button onclick="closeModal('modal-scaleup')" class="text-slate-500 hover:text-white hover:bg-white/10 p-1.5 rounded-lg transition-all">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
-      <div class="space-y-2">
-        <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg shadow-indigo-500/50">
+      <!-- Passport Header -->
+      <div class="space-y-2 -mt-2">
+        <div class="w-14 h-14 bg-gradient-to-br from-indigo-500 to-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto shadow-xl shadow-indigo-500/30">
           <i data-lucide="award" class="w-7 h-7"></i>
         </div>
-        <h3 class="text-xl font-extrabold tracking-tight">DIGITAL SCALE-UP PASSPORT</h3>
-        <p class="text-xs text-indigo-300 font-mono">ID: SCALEUP-PASS-APP-9012</p>
+        <div>
+          <div class="text-[10px] font-bold text-indigo-400 uppercase tracking-widest mb-1">Government of India · GovTech Pathway</div>
+          <h3 class="text-xl font-black tracking-tight">DIGITAL SCALE-UP PASSPORT</h3>
+        </div>
+        <p class="text-xs font-mono text-indigo-300" id="passport-id-label">ID: SCALEUP-PASS-APP-9012</p>
       </div>
 
-      <div id="passport-card-content" class="bg-slate-900/90 border border-indigo-500/30 p-4 rounded-2xl text-xs text-left space-y-2 font-mono">
-        <!-- Loaded via app.js -->
+      <!-- Passport Card -->
+      <div id="passport-card-content" class="bg-slate-950/60 border border-indigo-500/20 p-4 rounded-2xl text-xs text-left space-y-2 font-mono backdrop-blur-sm">
+        <!-- Dynamic via app.js -->
       </div>
 
-      <!-- QR CODE INTEGRATION -->
-      <div class="bg-white p-3 rounded-2xl max-w-[170px] mx-auto shadow-lg space-y-1 text-center">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Frahul-creatorprog.github.io%2FGap2solution%2Fverify.html%3Fid%3DAPP-9012" alt="QR Passport" class="mx-auto rounded-lg">
-        <span class="text-[10px] text-slate-700 font-bold block">📷 Scan with Phone Camera</span>
+      <!-- QR Code -->
+      <div class="bg-white p-3 rounded-2xl max-w-[175px] mx-auto shadow-xl space-y-1.5 text-center">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Frahul-creatorprog.github.io%2FGap2solution%2Fverify.html%3Fid%3DAPP-9012" alt="Scale-Up Passport QR" class="mx-auto rounded-xl" id="passport-qr-img">
+        <div class="text-[10px] text-slate-600 font-bold">📷 Scan to Issue Work Order</div>
+        <div class="text-[9px] text-slate-400">Opens Cross-District Procurement Engine</div>
       </div>
 
-      <div class="text-[11px] text-indigo-300 pt-2">
-        Authorized for Direct Cross-District & Cross-Department Adoption
+      <div class="text-[11px] text-indigo-300 font-medium">
+        ✅ Authorized for Direct Cross-District & Cross-Department Adoption
       </div>
     </div>
   </div>
 
-  <!-- JavaScript App Engine -->
+
+  <!-- JavaScript Engine -->
   <script src="app.js"></script>
   <script>
-    // Initialize Lucide Icons
     lucide.createIcons();
   </script>
 </body>

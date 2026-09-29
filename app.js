@@ -87,10 +87,19 @@ async function fetchApplications() {
   }
 }
 
+// --- UPDATE STAT COUNTERS ---
+function updateStatCounters() {
+  const sc = document.getElementById("stat-challenges");
+  const sa = document.getElementById("stat-applications");
+  if (sc) sc.textContent = globalChallenges.length;
+  if (sa) sa.textContent = globalApplications.length;
+}
+
 // --- RENDER DEPARTMENT CHALLENGES ---
 function renderDeptChallenges() {
   const container = document.getElementById("dept-challenges-list");
   if (!container) return;
+  updateStatCounters();
 
   if (!globalChallenges || globalChallenges.length === 0) {
     container.innerHTML = `
@@ -180,6 +189,7 @@ function renderStartupChallenges() {
 function renderEscrowTracker() {
   const container = document.getElementById("escrow-tracker-container");
   if (!container) return;
+  updateStatCounters();
 
   if (!globalApplications || globalApplications.length === 0) {
     container.innerHTML = `
@@ -672,13 +682,13 @@ async function triggerScaleUpPassport(applicationId) {
     `;
   }
 
-  const qrImg = document.querySelector("#modal-scaleup img");
+  const qrImg = document.getElementById("passport-qr-img");
   if (qrImg) {
     const targetUrl = encodeURIComponent(`https://rahul-creatorprog.github.io/Gap2solution/verify.html?id=${appItem.id}&startup=${encodeURIComponent(appItem.startupName)}&dept=${encodeURIComponent(challenge.department)}&title=${encodeURIComponent(challenge.title)}&score=${appItem.averageScore || 8.7}`);
     qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${targetUrl}`;
   }
 
-  const passIdLabel = document.querySelector("#modal-scaleup p.font-mono");
+  const passIdLabel = document.getElementById("passport-id-label");
   if (passIdLabel) {
     passIdLabel.innerText = `ID: ${passport.passportId}`;
   }
