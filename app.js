@@ -17,7 +17,9 @@ function resetPrototypeData() {
   globalApplications = [];
   renderDeptChallenges();
   renderStartupChallenges();
-  alert("✨ Prototype data reset successfully! You can now publish a fresh problem statement.");
+  renderEscrowTracker();
+  renderExpertPanel();
+  alert("✨ Prototype state reset completely! All challenges, applications, escrow trackers, and evaluator panels are cleared.");
 }
 
 // --- ROLE SWITCHER LOGIC ---
@@ -79,6 +81,9 @@ async function fetchApplications() {
     }
   } catch (err) {
     console.log("Using client-side applications store.");
+  } finally {
+    renderEscrowTracker();
+    renderExpertPanel();
   }
 }
 
@@ -171,7 +176,163 @@ function renderStartupChallenges() {
   if (window.lucide) lucide.createIcons();
 }
 
-// --- AI OPTIMIZER TRIGGER (GEMINI + FALLBACK REFINER) ---
+// --- RENDER ESCROW FINANCIAL TRACKER (DYNAMIC) ---
+function renderEscrowTracker() {
+  const container = document.getElementById("escrow-tracker-container");
+  if (!container) return;
+
+  if (!globalApplications || globalApplications.length === 0) {
+    container.innerHTML = `
+      <div class="bg-slate-900 text-white p-6 rounded-2xl shadow-md text-center space-y-2">
+        <div class="w-10 h-10 bg-slate-800 text-amber-400 rounded-full flex items-center justify-center mx-auto">
+          <i data-lucide="shield-alert" class="w-5 h-5"></i>
+        </div>
+        <h4 class="font-bold text-sm text-white">No Active Pilot Escrow Pipeline</h4>
+        <p class="text-xs text-slate-400 max-w-md mx-auto">Publish a challenge and submit an application to activate the RazorpayX Milestone Escrow Tracker.</p>
+      </div>
+    `;
+    if (window.lucide) lucide.createIcons();
+    return;
+  }
+
+  const appItem = globalApplications[0];
+  const challenge = globalChallenges.find(c => c.id === appItem.challengeId) || { title: "Active Sandbox Pilot Solution", pilotBudget: "₹15,00,000" };
+
+  container.innerHTML = `
+    <div class="bg-slate-900 text-white p-5 rounded-2xl shadow-md space-y-4">
+      <div class="flex flex-wrap justify-between items-center gap-2">
+        <div>
+          <span class="text-xs text-slate-400 uppercase font-semibold tracking-wider">Active Pilot Escrow Tracker</span>
+          <h3 class="text-lg font-bold text-white">${challenge.title}</h3>
+        </div>
+        <span class="bg-indigo-600 text-white px-3 py-1 rounded-full text-xs font-bold">Total Budget: ${challenge.pilotBudget || '₹15,00,000'}</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div class="bg-slate-800/80 p-3.5 rounded-xl border border-slate-700">
+          <span class="text-slate-400">Disbursed (Phase 1):</span>
+          <div class="text-lg font-bold text-emerald-400">₹5,00,000 ✅</div>
+        </div>
+        <div class="bg-slate-800/80 p-3.5 rounded-xl border border-slate-700">
+          <span class="text-slate-400">Locked in Escrow (Phase 2):</span>
+          <div class="text-lg font-bold text-amber-400">₹6,00,000 🔒</div>
+        </div>
+        <div class="bg-slate-800/80 p-3.5 rounded-xl border border-slate-700">
+          <span class="text-slate-400">Pending Final (Phase 3):</span>
+          <div class="text-lg font-bold text-slate-300">₹4,00,000 ⏳</div>
+        </div>
+      </div>
+
+      <div class="w-full bg-slate-800 rounded-full h-3 overflow-hidden border border-slate-700">
+        <div class="bg-gradient-to-r from-emerald-500 to-indigo-500 h-3 rounded-full progress-bar-fill" style="width: 40%"></div>
+      </div>
+    </div>
+  `;
+  if (window.lucide) lucide.createIcons();
+}
+
+// --- RENDER EXPERT EVALUATION PANEL (DYNAMIC) ---
+function renderExpertPanel() {
+  const container = document.getElementById("expert-panel-container");
+  if (!container) return;
+
+  if (!globalApplications || globalApplications.length === 0) {
+    container.innerHTML = `
+      <div class="p-10 text-center bg-white rounded-2xl border border-slate-200 shadow-sm space-y-3">
+        <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-full flex items-center justify-center mx-auto">
+          <i data-lucide="user-check" class="w-6 h-6"></i>
+        </div>
+        <h4 class="font-bold text-slate-800 text-base">No Applications Pending Expert Evaluation</h4>
+        <p class="text-xs text-slate-500 max-w-md mx-auto">Once a startup submits an application for a challenge, it will appear here for split-screen technical scoring and Safe-to-Fail Sandbox approval.</p>
+      </div>
+    `;
+    if (window.lucide) lucide.createIcons();
+    return;
+  }
+
+  const appItem = globalApplications[0];
+  const challenge = globalChallenges.find(c => c.id === appItem.challengeId) || { title: "Government Innovation Pilot Challenge" };
+
+  container.innerHTML = `
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden min-h-[480px]">
+      <!-- LEFT 60%: PROPOSAL & SANDBOX DATA -->
+      <div class="lg:col-span-7 p-6 split-left space-y-4 bg-slate-50">
+        <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+          <div>
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Application Review</span>
+            <h3 class="text-lg font-bold text-slate-900">${appItem.startupName}</h3>
+          </div>
+          <span class="badge-dpiit text-xs px-2.5 py-1 rounded-full font-bold">DPIIT Verified: ${appItem.dpiitNumber}</span>
+        </div>
+
+        <div class="space-y-3 text-xs">
+          <div>
+            <span class="font-bold text-slate-700">Target Challenge:</span>
+            <p class="text-slate-600 font-semibold">${challenge.title}</p>
+          </div>
+          <div>
+            <span class="font-bold text-slate-700">Proposed Technical Solution:</span>
+            <p class="text-slate-600 leading-relaxed bg-white p-3 rounded-xl border border-slate-200">
+              ${appItem.solutionSummary}
+            </p>
+          </div>
+          <div class="flex items-center gap-3">
+            <a href="${appItem.pitchLink || '#'}" target="_blank" class="text-blue-600 font-bold hover:underline flex items-center gap-1">
+              <i data-lucide="file-text" class="w-4 h-4"></i> View Pitch Deck PDF
+            </a>
+            <span class="text-slate-400">|</span>
+            <span class="badge-gfr text-xs px-2 py-0.5 rounded font-semibold">GFR 2017 Rule 161 Exemption Attached</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT 40%: SCORING SLIDERS & APPROVAL -->
+      <div class="lg:col-span-5 p-6 space-y-5 flex flex-col justify-between">
+        <div>
+          <h4 class="font-bold text-slate-900 text-sm border-b border-slate-200 pb-2 mb-4">Objective Evaluation Rubric</h4>
+          
+          <div class="space-y-4 text-xs">
+            <div>
+              <div class="flex justify-between font-bold text-slate-700 mb-1">
+                <span>Technical Feasibility (1-10):</span>
+                <span id="val-tech-score" class="text-blue-600">9</span>
+              </div>
+              <input type="range" min="1" max="10" value="9" oninput="document.getElementById('val-tech-score').innerText = this.value" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600">
+            </div>
+
+            <div>
+              <div class="flex justify-between font-bold text-slate-700 mb-1">
+                <span>Operational Feasibility (1-10):</span>
+                <span id="val-feas-score" class="text-blue-600">9</span>
+              </div>
+              <input type="range" min="1" max="10" value="9" oninput="document.getElementById('val-feas-score').innerText = this.value" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600">
+            </div>
+
+            <div>
+              <div class="flex justify-between font-bold text-slate-700 mb-1">
+                <span>Cybersecurity & Risk Score (1-10):</span>
+                <span id="val-sec-score" class="text-blue-600">8</span>
+              </div>
+              <input type="range" min="1" max="10" value="8" oninput="document.getElementById('val-sec-score').innerText = this.value" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600">
+            </div>
+
+            <div>
+              <label class="font-bold text-slate-700 block mb-1">Evaluator Comments & Recommendations:</label>
+              <textarea id="eval-comments" rows="3" class="w-full p-2.5 border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Technical logs verified. Recommended for sandbox pilot."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="submitEvaluation('${appItem.id}')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-2 shadow-md transition-all">
+          <i data-lucide="check-square" class="w-4 h-4"></i> Submit Score & Grant Sandbox Pilot License
+        </button>
+      </div>
+    </div>
+  `;
+  if (window.lucide) lucide.createIcons();
+}
+
+// --- AI OPTIMIZER TRIGGER ---
 async function triggerAIOptimizer() {
   const rawProbInput = document.getElementById("input-problem");
   const deptInput = document.getElementById("input-dept");
@@ -185,7 +346,6 @@ async function triggerAIOptimizer() {
     return;
   }
 
-  // Visual feedback: show refining status
   outcomeInput.value = "✨ Gemini AI Engine is converting problem statement into outcome-based procurement KPIs...";
   
   let resultText = "";
@@ -207,7 +367,6 @@ async function triggerAIOptimizer() {
   }
 
   if (!resultText) {
-    // Client-side Gemini AI refiner synthesis logic
     resultText = `Deploy innovative IoT & AI-powered technology solutions to address "${rawProb}" for ${dept}, establishing a 90-day Safe-to-Fail pilot targeting >= 35% operational efficiency improvement, 99.2% uptime SLA, and zero-turnover DPIIT innovator exemption under GFR 2017 Rule 161 & Maharashtra Startup Policy Sec 4.2.`;
   }
 
@@ -349,6 +508,8 @@ async function handleApplySubmit(e) {
 
   globalApplications.unshift(newApp);
   closeModal('modal-apply');
+  renderEscrowTracker();
+  renderExpertPanel();
   alert("🎉 Application Submitted Successfully with DPIIT GFR 2017 Innovator Exemption Waiver!");
 }
 
@@ -360,20 +521,7 @@ async function submitEvaluation(applicationId) {
   const comments = document.getElementById("eval-comments")?.value || "Feasible VTOL stability logs verified.";
 
   let appItem = globalApplications.find(a => a.id === applicationId) || globalApplications[0];
-  if (!appItem) {
-    appItem = {
-      id: applicationId || "APP-9012",
-      startupName: "AeroMed Robotics Pvt Ltd",
-      dpiitNumber: "DPIIT89421",
-      challengeId: "CHAL-001",
-      scores: [],
-      milestones: [
-        { id: "M1", title: "Phase 1: Setup", amount: "₹5,00,000", status: "COMPLETED", disbursed: true },
-        { id: "M2", title: "Phase 2: Field Trial", amount: "₹6,00,000", status: "IN_PROGRESS", disbursed: false }
-      ]
-    };
-    globalApplications.push(appItem);
-  }
+  if (!appItem) return;
 
   const scoreObj = {
     evaluator: "Dr. K. Raman (Tech Expert)",
@@ -416,7 +564,7 @@ async function submitEvaluation(applicationId) {
   alert(`✅ Score of ${appItem.averageScore}/10 Recorded!\n\n🛡️ Safe-to-Fail Sandbox License Granted & Department Indemnity Active under MSInS Policy Sec 4.2!`);
 }
 
-// --- CAG AUDIT TRAIL MODAL (OFFLINE-SAFE) ---
+// --- CAG AUDIT TRAIL MODAL ---
 async function triggerAuditReport(applicationId) {
   let appItem = globalApplications.find(a => a.id === applicationId) || globalApplications[0] || {
     id: "APP-9012",
@@ -447,7 +595,7 @@ async function triggerAuditReport(applicationId) {
     expertPanelEvaluations: appItem.scores,
     overallEvaluationAverage: appItem.averageScore || 8.7,
     contractRef: appItem.contract,
-    milestonePaymentAudit: appItem.milestones.map(m => ({
+    milestonePaymentAudit: (appItem.milestones || []).map(m => ({
       milestone: m.title,
       amount: m.amount,
       status: m.status,
