@@ -219,7 +219,7 @@ function renderDeptChallenges() {
       <div class="flex justify-between items-center text-xs pt-1 border-t border-slate-100">
         <span class="font-bold text-slate-800">Pilot Budget: <span class="text-emerald-600">${c.pilotBudget}</span></span>
         <div class="flex gap-2">
-          <button onclick="openApplyModal('${c.id}')" class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold px-3 py-1.5 rounded-lg">View Applications (${globalApplications.filter(a => a.challengeId === c.id || c.id === 'CHAL-MH-2026-002').length})</button>
+          <button onclick="openApplyModal('${c.id}')" class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold px-3 py-1.5 rounded-lg">Apply / View Details</button>
         </div>
       </div>
     </div>
@@ -358,7 +358,6 @@ async function verifyDPIITInline() {
     return;
   }
 
-  let verified = true;
   let message = `DPIIT Verified (${dpiitNum.toUpperCase()}). GFR 2017 Rule 161 & Rule 170(i) EMD & Turnover Exemption Granted!`;
 
   try {
@@ -556,7 +555,7 @@ async function triggerAuditReport(applicationId) {
   openModal("modal-audit");
 }
 
-// --- SCALE UP PASSPORT MODAL (OFFLINE-SAFE) ---
+// --- DYNAMIC SCALE UP PASSPORT MODAL (WITH SPECIFIC QR LINK PER APPLICATION) ---
 async function triggerScaleUpPassport(applicationId) {
   let appItem = globalApplications.find(a => a.id === applicationId) || globalApplications[0];
   let challenge = globalChallenges.find(c => c.id === appItem.challengeId) || globalChallenges[0];
@@ -568,22 +567,10 @@ async function triggerScaleUpPassport(applicationId) {
     dpiitRef: appItem.dpiitNumber,
     hostDepartment: challenge.department,
     validatedSolution: challenge.title,
-    pilotScoreAchieved: `${appItem.averageScore} / 10`,
+    pilotScoreAchieved: `${appItem.averageScore || 8.7} / 10`,
     scaleUpRecommendation: "APPROVED FOR DIRECT CROSS-DISTRICT & CROSS-DEPARTMENT PROCUREMENTS WITHOUT RE-PILOTING",
-    qrVerificationHash: `SHA256-MH-GOV-2026-EXP884`
+    qrVerificationHash: `SHA256-${appItem.id}-VERIFIED`
   };
-
-  try {
-    const res = await fetch(`/api/scaleup-passport/${applicationId}`);
-    if (res.ok) {
-      const json = await res.json();
-      if (json.success && json.passport) {
-        passport = json.passport;
-      }
-    }
-  } catch (err) {
-    console.log("Generated Scale-Up Passport client-side.");
-  }
 
   const container = document.getElementById("passport-card-content");
   if (container) {
@@ -597,6 +584,18 @@ async function triggerScaleUpPassport(applicationId) {
         RECOMMENDATION: ${passport.scaleUpRecommendation}
       </div>
     `;
+  }
+
+  // Update QR Code Image dynamically with application-specific parameters!
+  const qrImg = document.querySelector("#modal-scaleup img");
+  if (qrImg) {
+    const targetUrl = encodeURIComponent(`https://rahul-creatorprog.github.io/Gap2solution/verify.html?id=${appItem.id}&startup=${encodeURIComponent(appItem.startupName)}&dept=${encodeURIComponent(challenge.department)}&title=${encodeURIComponent(challenge.title)}&score=${appItem.averageScore || 8.7}`);
+    qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${targetUrl}`;
+  }
+
+  const passIdLabel = document.querySelector("#modal-scaleup p.font-mono");
+  if (passIdLabel) {
+    passIdLabel.innerText = `ID: ${passport.passportId}`;
   }
 
   openModal("modal-scaleup");
